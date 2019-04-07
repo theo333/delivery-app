@@ -1,12 +1,13 @@
 module.exports = {
-  devtool: 'eval',
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
-      }
-    ]
-  }
+	entry: './client/index.js',
+	devtool: 'eval',
+	module: {
+		rules: [
+			{
+				test: /\.js$/,
+				loader: 'babel-loader',
+				exclude: /node_modules/
+			}
+		]
+	}
 };
