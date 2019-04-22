@@ -20,13 +20,15 @@
 			"stage-2"
 		]
 	},
-	"devDependencies": {},
+	"devDependencies": {
+		"nodemon": "^1.18.11"
+	},
 	"scripts": {
 		"start": "node server/index.js",
 		"postinstall": "npm run webpack",
 		"webpack": "webpack",
 		"webpack:dev": "npm run webpack -- --mode=development --watch",
-		"start:dev": "npm run webpack:dev & nodemon server/index.js --ignore client/ --ignore dist/"
+		"start:dev": "npm run webpack:dev & ./node_modules/.bin/nodemon server/index.js --ignore client/ --ignore dist/"
 	},
 	"keywords": [],
 	"author": "",
