@@ -1,4 +1,4 @@
-# \_project_name
+## \_project_name
 
 ### View live on Heroku
 
@@ -26,7 +26,7 @@ heroku_url
 - Axios
 - Deploy to Heroku
 
-# react-minimal template
+### react-minimal template
 
 - npm install
 - npm run start:dev
