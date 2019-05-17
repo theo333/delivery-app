@@ -1,4 +1,4 @@
-## \_project_name
+## Stackathon: Delivery Zones Map
 
 ### View live on Heroku
 
@@ -6,10 +6,8 @@ heroku_url
 
 ### Project Details
 
-- assigned
-- due
-- (?) No beginning repo
-- Replicate this: profs_heroku_url
+- assigned 5/14/19
+- due 5/18/19
 - Description:
 
 ### Challenges

@@ -1,14 +1,16 @@
 {
-  "name": "react-basic-template",
+  "name": "delivery-zone-map-stackathon",
   "version": "1.0.0",
   "description": "",
   "main": "db.js",
   "dependencies": {
+    "dotenv": "^8.0.0",
     "express": "^4.16.4",
-    "pg": "^7.10.0",
     "morgan": "^1.9.1",
+    "pg": "^7.10.0",
     "react": "^16.8.3",
-    "react-dom": "^16.8.3"
+    "react-dom": "^16.8.3",
+    "react-map-gl": "^4.1.2"
   },
   "babel": {
     "presets": [
@@ -41,7 +43,7 @@
     "postinstall": "npm run webpack",
     "webpack": "webpack",
     "webpack:dev": "npm run webpack -- --mode=development --watch",
-    "start:dev": "npm run webpack:dev & ./node_modules/.bin/nodemon server/index.js --ignore client/ --ignore public/",
+    "start:dev": "npm run webpack:dev & ./node_modules/.bin/nodemon  --require dotenv/config server/index.js --ignore client/ --ignore public/",
     "lint": "make lint"
   },
   "keywords": [],
