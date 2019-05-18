@@ -23,7 +23,6 @@
 // 		};
 // 	}
 
-
 // 	componentDidMount() {
 // 		window.addEventListener('resize', this.resize);
 // 		this.resize();
