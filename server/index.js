@@ -6,13 +6,13 @@ const morgan = require('morgan');
 // require('../vars');
 
 // dotenv.config();
-console.log(process.env.MapboxAccessToken)
+console.log('token: ', process.env.REACT_MAP_MAPBOX_TOKEN);
 
 const PORT = process.env.PORT || 3000;
 
 app.use(morgan('dev'));
 
-app.get('/app', (req, res, next) => res.sendFile(path.join(__dirname, '../public', 'main.js')));
+app.get('/app.js', (req, res, next) => res.sendFile(path.join(__dirname, '../public', 'main.js')));
 
 app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, '../public', 'index.html')));
 
