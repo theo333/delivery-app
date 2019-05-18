@@ -1,3 +1,24 @@
 .enter-info {
   background-color: burlywood;
 }
+
+.fa-heart {
+  font-size: 25px;
+  color: red;
+}
+
+.fa-map-pin {
+  font-size: 35px;
+  color: red;
+}
+
+.btn-pin {
+  color: red;
+}
+
+.search-idx {
+  color: red;
+  margin-right: 0.3rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+}

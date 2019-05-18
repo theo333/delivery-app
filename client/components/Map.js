@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import ReactMapGL, { Marker } from 'react-map-gl';
-// import Geocoder from '@mapbox/react-geocoder';
+import ReactMapGL, { Marker, Layer, Feature } from 'react-map-gl';
 import Geocoder from 'react-geocoder-autocomplete';
+import Cookies from 'js-cookie';
 
 import TOKEN from '../../vars';
 
@@ -16,34 +16,120 @@ export default class Map extends Component {
 				longitude: -74.0873832,
 				zoom: 12,
 			},
-			location: [40.850979, -74.085076], // [lat, long]
-			// value,
+			storeLocation: [-74.085076, 40.850979], // [long, lat]
+			currentSearch: null,
+			searches: [],
 		};
 	}
 
-	// onSelect = value => {
-	//   this.setState({
-	//     value,
-	//   });
-	// };
+	componentDidMount() {
+		const searches = Cookies.getJSON('searches');
+		if (searches) {
+			this.setState({ searches })
+		}
+	}
+
+	onSelect = currentSearch => {
+		const { searches } = this.state;
+		this.setState({
+			currentSearch,
+			searches: [...searches, currentSearch]
+		}, () => console.log('onSelect: ', this.state));
+
+		if (searches.length) {
+			Cookies.set('searches', searches);
+		}
+	};
+
+	onInputChange = value => {
+		console.log('input change: ', value);
+	}
+
+	deleteSearchItem = itemId => {
+		console.log({ itemId })
+		const newSearches = this.state.searches.filter(search => search.id !== itemId);
+		this.setState({
+			...this.state,
+			searches: newSearches,
+		})
+	}
 
 	render() {
-		console.log('map token: ', process.env.REACT_MAP_MAPBOX_TOKEN);
-		const { location } = this.state;
+		const { storeLocation, currentSearch, searches } = this.state;
+		console.log({ searches })
+		const polygonCoords = '-74.14048470500725,40.82756361297996,-74.04012267980431,40.87299245764015';
+		const polygonPaint = {
+			'fill-color': '#6f788a',
+			'fill-opacity': 0.5,
+		}
 		return (
-			<ReactMapGL
-				{...this.state.viewport}
-				// onViewportChange={viewport => this.setState({ viewport })}
-				mapStyle="mapbox://styles/theo333/cjvspb9dj1ma81cs3lsp05mdz" // get from Map Studio
-				mapboxApiAccessToken={TOKEN}
-			>
-				<Geocoder accessToken={TOKEN} showLoader />
-				<Marker latitude={location[0]} longitude={location[1]}>
-					{/* <button> */}
-					<img src="/images/32px-heart.png" alt="heart" />
-					{/* </button> */}
-				</Marker>
-			</ReactMapGL>
+			<div className="row">
+				<div className="col-md-4 enter-info">
+					<h2 className='text-center'>Searches</h2>
+					<ul className='list-group'>
+						{
+							searches ? (
+								searches.map((search, idx) => {
+									return (
+										<li key={search.id} className='list-group-item'>
+											<span className='search-idx'>{idx + 1} :</span>{search.place_name}
+											<button onClick={() => this.deleteSearchItem(search.id)}>X</button>
+										</li>
+									)
+								})
+							) : ''
+						}
+					</ul>
+				</div>
+				<div className="col-md-8">
+					<ReactMapGL
+						{...this.state.viewport}
+						onViewportChange={viewport => this.setState({ viewport })}
+						mapStyle="mapbox://styles/theo333/cjvspb9dj1ma81cs3lsp05mdz" // get from Map Studio
+						mapboxApiAccessToken={TOKEN}
+					>
+						<Geocoder
+							accessToken={TOKEN}
+							onSelect={this.onSelect}
+							showLoader={false}
+							onInputChange={this.onInputChange}
+							proximity={'-74.085076,40.850979'}
+							bbox={'-74.14048470500725,40.82756361297996,-74.04012267980431,40.87299245764015'}
+						/>
+						{/* <Layer type='fill' paint={polygonPaint}>
+							<Feature coordinates={polygonCoords} />
+						</Layer> */}
+						<Marker
+							longitude={storeLocation[0]}
+							latitude={storeLocation[1]}
+						>
+							<i className="fas fa-heart"></i>
+						</Marker>
+						{/* {currentSearch && (
+							<Marker
+								longitude={currentSearch.center[0]}
+								latitude={currentSearch.center[1]}
+							>
+								<i className="fas fa-map-pin"></i>
+							</Marker>
+						)} */}
+						{searches && (
+							searches.map((search, idx) => {
+								return (
+									<Marker key={idx}
+										longitude={search.center[0]}
+										latitude={search.center[1]}
+									>
+										<button className='btn-pin'>{idx + 1}</button>
+										<i className="fas fa-map-pin"></i>
+									</Marker>
+								)
+							})
+						)}
+
+					</ReactMapGL>
+				</div>
+			</div>
 		);
 	}
 }
