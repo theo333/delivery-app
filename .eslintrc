@@ -61,6 +61,7 @@
     "jest/no-focused-tests": "error",
     "jest/no-identical-title": "error",
     "import/no-extraneous-dependencies": 1,
+    "react/no-array-index-key": 1,
     "react/jsx-filename-extension": 0,
     "react/prop-types": 0,
     "react/no-multi-comp": 0,
