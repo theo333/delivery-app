@@ -5,6 +5,7 @@
   "main": "db.js",
   "dependencies": {
     "@babel/preset-es2015": "^7.0.0-beta.53",
+    "@turf/points-within-polygon": "^5.1.5",
     "css-loader": "^2.1.1",
     "dotenv": "^8.0.0",
     "express": "^4.16.4",
@@ -26,7 +27,7 @@
     ]
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
+    "@babel/core": "^7.5.5",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^7.1.5",
     "babel-preset-react": "^6.24.1",
