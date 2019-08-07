@@ -29,7 +29,7 @@ export default class Map extends Component {
     }
   }
 
-  onSelect = currentSearch => {
+  onSelect(currentSearch) {
     const { searches } = this.state;
     this.setState(
       {
@@ -42,20 +42,20 @@ export default class Map extends Component {
     if (searches.length) {
       Cookies.set('searches', searches);
     }
-  };
+  }
 
-  onInputChange = value => {
+  onInputChange(value) {
     console.log('input change: ', value);
-  };
+  }
 
-  deleteSearchItem = itemId => {
+  deleteSearchItem(itemId) {
     console.log({ itemId });
     const newSearches = this.state.searches.filter(search => search.id !== itemId);
     this.setState({
       // ...this.state,
       searches: newSearches,
     });
-  };
+  }
 
   render() {
     const { storeLocation, currentSearch, searches } = this.state;
