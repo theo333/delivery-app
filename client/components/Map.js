@@ -50,6 +50,7 @@ export default class Map extends Component {
 
   deleteSearchItem(itemId) {
     console.log({ itemId });
+    // eslint-disable-next-line react/no-access-state-in-setstate
     const newSearches = this.state.searches.filter(search => search.id !== itemId);
     this.setState({
       // ...this.state,
@@ -74,14 +75,14 @@ export default class Map extends Component {
             {/* eslint-disable */}
             {searches
               ? searches.map((search, idx) => {
-                return (
-                  <li key={search.id} className="list-group-item">
-                    <span className="search-idx">{idx + 1} :</span>
-                    {search.place_name}
-                    <button onClick={() => this.deleteSearchItem(search.id)}>X</button>
-                  </li>
-                );
-              })
+                  return (
+                    <li key={search.id} className="list-group-item">
+                      <span className="search-idx">{idx + 1} :</span>
+                      {search.place_name}
+                      <button onClick={() => this.deleteSearchItem(search.id)}>X</button>
+                    </li>
+                  );
+                })
               : ''}
             {/* eslint-enable */}
           </ul>
