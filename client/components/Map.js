@@ -22,7 +22,7 @@ export default class Map extends Component {
       currentSearch: null,
       searches: [],
     };
-    console.log('this', this)
+    console.log('this', this);
   }
 
   componentDidMount() {
@@ -33,7 +33,7 @@ export default class Map extends Component {
   }
 
   onSelect(currentSearch) {
-    console.log('this', this)
+    console.log('this', this);
     const { searches } = this.state;
     this.setState(
       {
@@ -95,8 +95,6 @@ export default class Map extends Component {
       'fill-opacity': 0.5,
     };
 
-
-
     return (
       <div className="row">
         <div className="col-md-4 enter-info">
@@ -105,15 +103,15 @@ export default class Map extends Component {
             {/* eslint-disable */}
             {searches
               ? searches.map((search, idx) => {
-                return (
-                  <li key={search.id} className="list-group-item">
-                    <span className="search-idx">{idx + 1} :</span>
-                    {search.place_name}
-                    {/* {this.isInDeliveryZone(search.center) ? 'we deliver ' : ''} */}
-                    <button onClick={() => this.deleteSearchItem(search.id)}>X</button>
-                  </li>
-                );
-              })
+                  return (
+                    <li key={search.id} className="list-group-item">
+                      <span className="search-idx">{idx + 1} :</span>
+                      {search.place_name}
+                      {/* {this.isInDeliveryZone(search.center) ? 'we deliver ' : ''} */}
+                      <button onClick={() => this.deleteSearchItem(search.id)}>X</button>
+                    </li>
+                  );
+                })
               : ''}
             {/* eslint-enable */}
           </ul>
