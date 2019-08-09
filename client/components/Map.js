@@ -30,6 +30,7 @@ export default class Map extends Component {
   }
 
   onSelect(currentSearch) {
+    console.log('this', this);
     const { searches } = this.state;
     this.setState(
       {
