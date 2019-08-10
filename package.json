@@ -5,6 +5,7 @@
   "main": "db.js",
   "dependencies": {
     "@turf/points-within-polygon": "^5.1.5",
+    "@turf/turf": "^5.1.6",
     "css-loader": "^2.1.1",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",

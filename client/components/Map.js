@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactMapGL, { Marker, Layer, Feature } from 'react-map-gl';
 import Geocoder from 'react-geocoder-autocomplete';
 import Cookies from 'js-cookie';
+// import Turf, { polygon, points, pointsWithinPolygon } from '@turf/points-within-polygon';
+// import { polygon, point, pointsWithinPolygon } from '@turf/turf';
 
 import TOKEN from '../../vars';
 
@@ -20,6 +22,10 @@ export default class Map extends Component {
       currentSearch: null,
       searches: [],
     };
+
+    this.onSelect = this.onSelect.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
+    this.deleteSearchItem = this.deleteSearchItem.bind(this);
   }
 
   componentDidMount() {
@@ -59,6 +65,29 @@ export default class Map extends Component {
     });
   }
 
+  // isInDeliveryZone() {
+  //   console.log('point', point);
+  //   const deliveryZonePolygon = polygon([
+  //     [
+  //       [-74.16237200261365, 40.89342416767394],
+  //       [-74.18537281000276, 40.85374706633121],
+  //       [-74.152309149392, 40.80080727373374],
+  //       [-74.08115040153235, 40.78629584751016],
+  //       [-74.0322736858356, 40.82274977948828],
+  //       [-74.00831451146911, 40.866250633673076],
+  //       [-74.0236483830664, 40.903928276891406],
+  //       [-74.07803570886267, 40.92547458939251],
+  //       [-74.1314646676952, 40.9225780148017],
+  //       [-74.16237200261365, 40.89342416767394],
+  //     ],
+  //   ]);
+
+  //   const clientLocation = point([-74.06492, 40.864938]);
+  //   const locationInDeliveryZone = pointsWithinPolygon(clientLocation, deliveryZonePolygon);
+  //   console.log('in delivery zone', locationInDeliveryZone.features.length);
+  //   return locationInDeliveryZone.features.length;
+  // }
+
   render() {
     const { storeLocation, currentSearch, searches } = this.state;
     console.log({ searches });
@@ -68,6 +97,7 @@ export default class Map extends Component {
       'fill-color': '#6f788a',
       'fill-opacity': 0.5,
     };
+
     return (
       <div className="row">
         <div className="col-md-4 enter-info">
@@ -80,6 +110,7 @@ export default class Map extends Component {
                     <li key={search.id} className="list-group-item">
                       <span className="search-idx">{idx + 1} :</span>
                       {search.place_name}
+                      {/* {this.isInDeliveryZone(search.center) ? 'we deliver ' : ''} */}
                       <button onClick={() => this.deleteSearchItem(search.id)}>X</button>
                     </li>
                   );
@@ -95,6 +126,7 @@ export default class Map extends Component {
             mapStyle="mapbox://styles/theo333/cjvspb9dj1ma81cs3lsp05mdz" // get from Map Studio
             mapboxApiAccessToken={TOKEN}
           >
+            {console.log('this in ReactMapGL', this)}
             <Geocoder
               accessToken={TOKEN}
               onSelect={this.onSelect}
@@ -104,6 +136,7 @@ export default class Map extends Component {
               // bbox="-74.14048470500725,40.82756361297996,-74.04012267980431,40.87299245764015"
               bbox="-74.18727287307729,40.809073440988225,-74.01471738916278,40.906762423175394"
             />
+            {console.log('geocoder - this', this)}
             {/* <Layer type='fill' paint={polygonPaint}>
 							<Feature coordinates={polygonCoords} />
             </Layer> */}
