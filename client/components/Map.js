@@ -22,7 +22,10 @@ export default class Map extends Component {
       currentSearch: null,
       searches: [],
     };
-    console.log('this', this);
+
+    this.onSelect = this.onSelect.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
+    this.deleteSearchItem = this.deleteSearchItem.bind(this);
   }
 
   componentDidMount() {
@@ -123,6 +126,7 @@ export default class Map extends Component {
             mapStyle="mapbox://styles/theo333/cjvspb9dj1ma81cs3lsp05mdz" // get from Map Studio
             mapboxApiAccessToken={TOKEN}
           >
+            {console.log('this in ReactMapGL', this)}
             <Geocoder
               accessToken={TOKEN}
               onSelect={this.onSelect}
