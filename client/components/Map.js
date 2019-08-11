@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactMapGL, { Marker, Layer, Feature } from 'react-map-gl';
 import Geocoder from 'react-geocoder-autocomplete';
 import Cookies from 'js-cookie';
-// import Turf, { polygon, points, pointsWithinPolygon } from '@turf/points-within-polygon';
 import { polygon, point, pointsWithinPolygon } from '@turf/turf';
 
 import TOKEN from '../../vars';
@@ -65,7 +64,9 @@ export default class Map extends Component {
     });
   }
 
-  isInDeliveryZone() {
+  isInDeliveryZone(currentSearchCoordinates) {
+    // same as green area on map
+    // coordinate data comes from studio.mapbox.com account
     const deliveryZonePolygon = polygon([
       [
         [-74.16237200261365, 40.89342416767394],
@@ -81,7 +82,7 @@ export default class Map extends Component {
       ],
     ]);
 
-    const clientLocation = point([-74.06492, 40.864938]);
+    const clientLocation = point(currentSearchCoordinates);
     const locationInDeliveryZone = pointsWithinPolygon(clientLocation, deliveryZonePolygon);
     return locationInDeliveryZone.features.length;
   }
@@ -104,6 +105,9 @@ export default class Map extends Component {
             {/* eslint-disable */}
             {searches
               ? searches.map((search, idx) => {
+                  {
+                    console.log('search', search);
+                  }
                   return (
                     <li key={search.id} className="list-group-item">
                       <span className="search-idx">{idx + 1} :</span>
@@ -121,7 +125,7 @@ export default class Map extends Component {
           <ReactMapGL
             {...this.state.viewport}
             onViewportChange={viewport => this.setState({ viewport })}
-            mapStyle="mapbox://styles/theo333/cjvspb9dj1ma81cs3lsp05mdz" // get from Map Studio
+            mapStyle="mapbox://styles/theo333/cjvspb9dj1ma81cs3lsp05mdz" // get from MapBox Studio
             mapboxApiAccessToken={TOKEN}
           >
             <Geocoder
@@ -130,8 +134,10 @@ export default class Map extends Component {
               showLoader={false}
               onInputChange={this.onInputChange}
               proximity="-74.085076,40.850979"
+              // bbox - limits search results to this area
               // bbox="-74.14048470500725,40.82756361297996,-74.04012267980431,40.87299245764015"
-              bbox="-74.18727287307729,40.809073440988225,-74.01471738916278,40.906762423175394"
+              // bbox="-74.18727287307729,40.809073440988225,-74.01471738916278,40.906762423175394"
+              bbox="-74.26110921823805,40.7991913964384,-73.97434436728172,40.9622544817727"
             />
             {/* <Layer type='fill' paint={polygonPaint}>
 							<Feature coordinates={polygonCoords} />
