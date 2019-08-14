@@ -2,12 +2,6 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const morgan = require('morgan');
-// require('dotenv').config();
-// require('../vars');
-
-// could not get this to work
-// dotenv.config();
-// console.log('token: ', process.env.REACT_MAP_MAPBOX_TOKEN);
 
 const PORT = process.env.PORT || 3000;
 
