@@ -21,21 +21,10 @@ export default class Map extends Component {
       currentSearch: null,
       searches: Cookies.getJSON('searches') || [],
     };
-    // this.myRef = React.createRef();
 
     this.onSelect = this.onSelect.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
     this.deleteSearchItem = this.deleteSearchItem.bind(this);
-  }
-
-  componentDidMount() {
-    // mapboxgl.accessToken = 'pk.eyJ1IjoidGhlbzMzMyIsImEiOiJjanNmZmlyNm4xMHVqM3l0bGVxenVvOWw0In0.bZVyyflQ7BPzt3ohmxw7Tw';
-    // var map = new mapboxgl.Map({
-    //   container: this.myRef, // container id
-    //   style: 'mapbox://styles/mapbox/dark-v10', //hosted style id
-    //   center: [-77.38, 39], // starting position
-    //   zoom: 3 // starting zoom
-    // });
   }
 
   onSelect(currentSearch) {
@@ -102,7 +91,6 @@ export default class Map extends Component {
 
     return (
       <div className="row">
-        {/* <div ref={this.myRef} /> */}
         <div className="col-md-4 enter-info">
           <h2 className="text-center">Searches</h2>
           <ul className="list-group">
