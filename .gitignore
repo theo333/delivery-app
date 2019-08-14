@@ -2,8 +2,8 @@
 .idea
 .vscode
 .env
-node_modules
 package-lock.json
+node_modules
 /public/main.js
 vars.js
-package-lock.json
+
